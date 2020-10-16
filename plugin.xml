@@ -30,9 +30,6 @@
     </platform>
 
     <platform name="android">
-        <dependency id="cordova-plugin-androidx" version="^2.0.0" />
-        <dependency id="cordova-plugin-androidx-adapter" version="^1.1.1" />
-
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="FirebaseVisionPlugin">
                 <param name="android-package" value="by.alon22.cordova.firebase.FirebaseVisionPlugin" />
@@ -49,10 +46,8 @@
         <source-file src="src/android/FirebaseVisionPlugin.java" target-dir="by/alon22/cordova/firebase"/>
         <source-file src="src/android/FirebaseUtils.java" target-dir="by/alon22/cordova/firebase"/>
 
-        <preference name="MKLKIT_VERSION" default="16.0.0"/>
-
-        <framework src="com.google.android.gms:play-services-mlkit-text-recognition:$MKLKIT_VERSION"/>
-        <framework src="com.google.mlkit:barcode-scanning:$MKLKIT_VERSION"/>
+        <framework src="com.google.android.gms:play-services-mlkit-text-recognition:16.1.1"/>
+        <framework src="com.google.mlkit:barcode-scanning:16.0.3"/>
 
     </platform>
 </plugin>

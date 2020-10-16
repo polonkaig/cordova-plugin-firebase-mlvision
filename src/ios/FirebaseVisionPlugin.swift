@@ -40,7 +40,8 @@ class FirebaseVisionPlugin: CDVPlugin {
             self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
             return
         }
-        getImage(imageURL: imageURL) { (image, error) in
+        //getImageFrom(imageURL: imageURL) { (image, error) in
+        getImageFromBase64(strBase64: imageURL) { (image, error) in
             if let error = error {
                 let pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: error.localizedDescription)
                 self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
@@ -61,6 +62,13 @@ class FirebaseVisionPlugin: CDVPlugin {
         }
     }
 
+    private func getImageFromBase64(strBase64: String,_ completion: @escaping (_ image: UIImage?, _ error: Error?) -> Void) {
+        //let dataDecoded : Data = Data(base64Encoded: strBase64, options: .ignoreUnknownCharacters)!
+        //let decodedimage = UIImage(data: dataDecoded)
+        let imageData = Data(base64Encoded: strBase64, options: Data.Base64DecodingOptions.ignoreUnknownCharacters)!
+        completion(UIImage(data: imageData)!, nil)
+    }
+    
     private func getImage(imageURL: String, _ completion: @escaping (_ image: UIImage?, _ error: Error?) -> Void) {
         guard let url = URL(string: imageURL) else {
             let error = NSError(domain: "cordova-plugin-firebase-mlvision",
